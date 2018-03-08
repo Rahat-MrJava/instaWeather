@@ -1,0 +1,13 @@
+{
+  "name": "scraper",
+  "version": "0.0.0",
+  "description": "A basic web scraper",
+  "main": "proto.js",
+  "author":"ben",
+  "license":"ISC",
+  "dependencies": {
+    "request" : "latest",
+    "cheerio" : "latest",
+    "node-fs-extra" : "latest"
+  }
+}
