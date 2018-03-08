@@ -32,7 +32,7 @@ export default class Home extends Component {
 		return (
 			<div class={"allRows " + style.home}>
 				<div class={"row " + style.row}>
-					<Tile title="Cloud Cover" data={this.state.cloudCoverage}/>
+					<Tile title="Temperature" data={this.state.tempurature}/>
 					<Tile title="Chance Of Rain" data={this.state.chanceOfRain}/>
 				</div>
 				<div class={"row " + style.row}>
@@ -40,10 +40,8 @@ export default class Home extends Component {
 					<Tile title="Wind Speed" data={this.state.windspeed}/>
 				</div>
 				<div class={"row " + style.row}>
-					<Tile title="Temperature" data={this.state.tempurature}/>
+					<Tile title="Cloud Cover" data={this.state.cloudCoverage}/>
 					<Tile title="Humidity" data={this.state.humidity}/>
-					<Tile title="Pressure" data={this.state.pressure}/>
-					<Tile title="Sunset Time" data={this.state.sunsetTime}/>
 		  		</div>
 		  		<div class={"row " + style.row}>
 		  			<Tile title="Rating" data={dailyRating}/>

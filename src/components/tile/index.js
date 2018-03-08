@@ -12,6 +12,12 @@ export default class Tile extends Component {
 		component based on properties passed in */
 	selectData(title) {
   		switch(title) {
+  			case "Temperature":
+	  			this.props.large = true;
+	  			this.props.colour = "shade1";
+  				this.props.icon = "thermometer";
+	  			this.props.data = parseInt(this.props.data) + "'C"; 
+	  			break;
   			case "Cloud Cover":
   				this.props.large = true;
   				this.props.colour = "shade3";
@@ -36,33 +42,11 @@ export default class Tile extends Component {
   				this.props.icon = "strong-wind";
 	  			this.props.data = parseInt(this.props.data) + " mph"; 
 	  			break;
-	  		case "Temperature":
-	  			this.props.large = false;
-	  			this.props.colour = "shade1";
-  				this.props.icon = "thermometer";
-	  			this.props.data = parseInt(this.props.data) + "'C"; 
-	  			break;
 	  		case "Humidity":
-	  			this.props.large = false;
+	  			this.props.large = true;
 	  			this.props.colour = "shade2";
   				this.props.icon = "humidity";
 	  			this.props.data = parseInt(this.props.data*100) + "%"; 
-	  			break;
-			case "Pressure":
-				this.props.large = false;
-				this.props.colour = "shade3";
-  				this.props.icon = "barometer";
-	  			this.props.data = parseInt(this.props.data) + " mb"; 
-	  			break;
-	  		case "Sunset Time":
-	  			this.props.large = false;
-	  			this.props.colour = "shade4";
-  				this.props.icon = "horizon-alt";
-  				//gets time from API in epoch, converts to real time
-  					var epochTime = this.props.data;
-					var d = new Date(0); //0 = epoch setting
-					d.setUTCSeconds(epochTime);
-	  			this.props.data = d.getHours() +":" + d.getMinutes();
 	  			break;
 	  		default:
 	  			return;
@@ -78,9 +62,6 @@ export default class Tile extends Component {
 					${style.rating } 
 					${style[this.props.colour]}
 				`}>
-					<span class={style.ratingData}>
-						Today's Stargazing Condition: {this.props.data}
-					</span> 
 				</div>
 			);
 		}
