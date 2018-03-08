@@ -35,7 +35,7 @@ export default class Notification extends Component {
 			this.fetchWeatherData();
 		}
 		if (this.props.notificationStatus) {
-			console.log("Notification: chance of rain = " + this.state.chanceOfRain1);
+			console.log("Reccomendation for outdoor event = " + this.state.chanceOfRain1);
 			var currentTime = new Date().getHours();
 			var nextHour = currentTime+1;
 			/* Construct message presented if there is a chance of rain >= 50% in the current hour */
@@ -44,8 +44,8 @@ export default class Notification extends Component {
 					<div class={"popover popover-notification " + style.notification}>
 						<span class={style.notData}>
 								<p>
-									<b>Current Weather Warning:</b><br/> 
-									{nextHour}:00 chance of rain is {parseInt((this.state.chanceOfRain1)*100)}%
+									<b>Reccomendation of events outdoor:</b><br/> 
+									{nextHour}:00 Reccomendation of outdoor is {parseInt((this.state.chanceOfRain1)*100)}%
 								</p>
 								<a href="#" class="link close-popover"></a>
 						</span>
@@ -68,11 +68,11 @@ export default class Notification extends Component {
 		  		}
 		  		/* Construct message presented if there is no chance of rain >= 50% in the next 11 hours */
 		  		if ( i === 11 ) {
-		  			message = "no rain expected for next 12 hours";
+		  			message = "Outdoor is recommended for the next 11 hours";
 		  		}
 		  		/* Construct message presented if there is a chance of rain >= 50% in the next 11 hours */
 		  		else {
-		  			message = futureHour+ ":00 chance of rain is " + chanceOfRainFuture + "%";
+		  			message = "Indoor is recommended for next few hours" + chanceOfRainFuture + "%";
 		  		}
 		  		
 		  		/* Return correct notification message given weather data in the current hour 
@@ -81,7 +81,7 @@ export default class Notification extends Component {
 		  			<div class={"popover popover-notification " + style.notification}>
 						<span class={style.notData}>
 								<p>
-									<b>No Current Weather Warnings:</b><br/> 
+									<b>Reccomendation for Outdoor Sport:</b><br/> 
 										{message}
 								</p>
 								<a href="#" class="link close-popover"></a>
