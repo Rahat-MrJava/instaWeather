@@ -3,26 +3,6 @@ import style from './style';
 
 export default class Forecast extends Component {
 
-
-	/* Recommendation Logic for participating in outdoor sport */
-	recommendation(){
-
-
-			recommendation = "Yes"
-		if(this.props.windSpeed < 5 ){
-
-			recommendation = "No";
-
-		} 
-
-
-		}
-
-
-	}
-
-
-
 	constructor(props) {
 		super(props);
 	}
