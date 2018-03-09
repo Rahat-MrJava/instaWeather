@@ -57,33 +57,55 @@ export default class App extends Component {
 				url: url,
 				dataType: "json",
 				success: function(res){
-					console.log(res);
+					// console.log(res);
 					if(res){
 						var activityType = 'outdoor';
-							const GM_API_KEY = 'AIzaSyAckapvwgWjPzEpPn4US7QD2-fNb8WuU0U';
+						const GM_API_KEY = 'AIzaSyAckapvwgWjPzEpPn4US7QD2-fNb8WuU0U';
 							
-							switch(res.weather[0].main){
-						    case 'Rain':
-						    case 'Thunderstorm':
-						    case 'Snow':
-						    case 'Mist':
-						      activityType = 'indoor';
-									break;
-						    default:
+						switch(res.weather[0].main){
+					    case 'Rain':
+					    case 'Thunderstorm':
+					    case 'Snow':
+					    case 'Mist':
+					      activityType = 'indoor';
 								break;
-						  }
+					    default:
+							break;
+					  }
 						$.ajax({
 								url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${activityType}+activities+in+${res.name}&location=${res.coord.lat},${res.coord.lon}&radius=12000&key=${GM_API_KEY}`,
 								dataType: "json",
 								success: function(gmres) {
-									that.setState({
-										longitude: res.coord.lon,
-										latitude: res.coord.lan,
-										fetchLocationCalled: true,
-										places: gmres
-									});
+									
+									if(gmres){
+										console.log(res);
+										that.setState({
+											longitude: res.coord.lon,
+											latitude: res.coord.lat,
+											fetchLocationCalled: true,
+											temperature: res.main.temp,
+											windspeed: res.wind.speed,
+											visibility: res.visibility,
+											humidity: res.main.humidity,
+											places: gmres
+										});
+										
+									} else {
+										that.setState({
+											longitude: res.coord.lon,
+											latitude: res.coord.lat,
+											fetchLocationCalled: true,
+											temperature: res.main.temp,
+											windspeed: res.wind.speed,
+											visibility: res.visibility,
+											humidity: res.main.humidity,
+											places: undefined
+										});
+									}
+									
+									// console.log(this.state);
+									
 									// that.parsePlaces(gmres);
-									console.log(gmres);
 								},
 								error: function(req,err){
 									
@@ -125,7 +147,15 @@ export default class App extends Component {
 									<Header getWeatherInfo={this.getInfo}onModeChange={mode => this.setState({...this.state, mode})} />
 										<div class="pages navbar-fixed toolbar-fixed">
 											<div class="page" data-page="index">
-												<Home apiKey={APIKEY} lat={LATITUDE} lon={LONGITUDE}/>
+												<Home 
+												apiKey={APIKEY}
+												lon={this.state.longitude}
+												lat={this.state.latitude}
+												temperature={this.state.temperature}
+												windspeed={this.state.windspeed}
+												visibility={this.state.visibility}
+												humidity={this.state.humidity}
+												/>
 												<EventHandler count="6" />
 											</div>
 										</div>

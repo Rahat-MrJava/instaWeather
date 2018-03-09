@@ -24,25 +24,27 @@ export default class Home extends Component {
 			success : this.parseResponse,
 			error : function(req, err){ console.log('Home: Weather API call failed, error: ' + err); }
 		})
+		
+		console.log(this.props);
 	}
 
 	/* Render home screen by placing Tile components in organized rows */
 	render() {
 		var dailyRating = this.getDailyRating();
-
+		console.log(this.props.temperature);
 		return (
 			<div class={"allRows " + style.home}>
 				<div class={"row " + style.row}>
-					<Tile title="Temperature" data={this.state.tempurature}/>
+					<Tile title="Temperature" data={this.props.temperature}/>
 					<Tile title="Chance Of Rain" data={this.state.chanceOfRain}/>
 				</div>
 				<div class={"row " + style.row}>
-					<Tile title="Average Visibility" data={this.state.visibility}/>
-					<Tile title="Wind Speed" data={this.state.windspeed}/>
+					<Tile title="Average Visibility" data={this.props.visibility}/>
+					<Tile title="Wind Speed" data={this.props.windspeed}/>
 				</div>
 				<div class={"row " + style.row}>
 					<Tile title="Cloud Cover" data={this.state.cloudCoverage}/>
-					<Tile title="Humidity" data={this.state.humidity}/>
+					<Tile title="Humidity" data={this.props.humidity}/>
 		  		</div>
 		  		<div class={"row " + style.row}>
 		  			<Tile title="Rating" data={dailyRating}/>

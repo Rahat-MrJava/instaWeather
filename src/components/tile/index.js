@@ -16,37 +16,37 @@ export default class Tile extends Component {
 	  			this.props.large = true;
 	  			this.props.colour = "shade1";
   				this.props.icon = "thermometer";
-	  			this.props.data = parseInt(this.props.data) + "'C"; 
+	  			this.props.data = this.props.data ? parseInt(this.props.data) + "'C" : "0'C"; 
 	  			break;
   			case "Cloud Cover":
   				this.props.large = true;
   				this.props.colour = "shade3";
   				this.props.icon = "cloud";
-	  			this.props.data = parseInt(this.props.data*100) +"%"; 
+	  			this.props.data = this.props.data ? parseInt(this.props.data*100) +"%" : "0%"; 
 	  			break;
 	  		case "Chance Of Rain":
 	  			this.props.large = true;
 	  			this.props.colour = "shade2";
   				this.props.icon = "rain";
-	  			this.props.data = parseInt(this.props.data*100) + "%"; 
+	  			this.props.data = this.props.data ? parseInt(this.props.data*100) + "%" : "0%"; 
 	  			break;
 	  		case "Average Visibility":
 	  			this.props.large = true;
 	  			this.props.colour = "shade4";
   				this.props.icon = "dust";
-	  			this.props.data = parseInt(this.props.data) + " mi"; 
+	  			this.props.data = this.props.data ? parseInt(this.props.data) + " mi" : "0 mi"; 
 	  			break;
 			case "Wind Speed":
 				this.props.large = true;
 				this.props.colour = "shade1";
   				this.props.icon = "strong-wind";
-	  			this.props.data = parseInt(this.props.data) + " mph"; 
+	  			this.props.data = this.props.data ? parseInt(this.props.data) + " m/sec" : "0 m/sec"; //metres/sec 
 	  			break;
 	  		case "Humidity":
 	  			this.props.large = true;
 	  			this.props.colour = "shade2";
   				this.props.icon = "humidity";
-	  			this.props.data = parseInt(this.props.data*100) + "%"; 
+	  			this.props.data = this.props.data ? parseInt(this.props.data*100) + "%" : "0%"; 
 	  			break;
 	  		default:
 	  			return;
