@@ -5,7 +5,7 @@ import Notification from '../notification';
 
 export default class Header extends Component {
 
-	/* Set initial state of app as "daytime" mode */
+	/* Set initial state of app as "outdoor" mode */
 	constructor(props) {
 		super(props);
 		this.setState({
@@ -13,7 +13,7 @@ export default class Header extends Component {
 		});
 	}
 
-	/* Switch between "daytime" and "nighttime" CSS */
+	/* Switch between "outdoor" and "indoor" CSS */
 	changeMode() {
 		if (this.state.mode === 'day') {
 			this.setState({...this.state, mode: 'night'})

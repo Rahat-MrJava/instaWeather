@@ -10,7 +10,7 @@ export default class Navigation extends Component {
 		super(props);
 	}
 
-	/* Select appropriate icon */
+	/* Selection of ICON if one is triggered */
 	selectData(title) {
   		switch(title) {
   			case "#view-day":
@@ -20,14 +20,14 @@ export default class Navigation extends Component {
   				this.props.icon = "home";
   				break;
 			case "#view-week":
-  				this.props.icon = "event";
+  				this.props.icon = "event";  
   				break;
 			default:		
 				return;
 		}
 	}
 
-	/* Render appropriate icon and assess whether icon should be in "active" or "inactive" mode */
+	/* For aesethetics render whether the icons should be highlighted or not*/
 	render(){
 		{this.selectData(this.props.title)}
 		return (
@@ -35,10 +35,16 @@ export default class Navigation extends Component {
 				${style.navigation} 				
 			`}>
 				<a href={this.props.title} class="link" onClick={() => this.props.onClick()}>
+					
+
 					<i class={`"icon"
 						material-icons
 						${this.props.active ? style.iconSelected : style.iconNotSelected}
 					`} >
+
+
+
+
 						{this.props.icon}
 					</i>
 				</a>

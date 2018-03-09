@@ -2,9 +2,16 @@ import { h, Component } from 'preact';
 import style from './style';
 import GoogleMapReact from 'google-map-react';
 import {geolocated} from 'react-geolocated';
+import $ from 'jquery'; 
 
 
 export class SimpleMap extends Component {
+
+
+
+
+
+	
   static defaultProps = {
     center: {lat: coords.latitude , coords.longitude};
     zoom: 11

@@ -10,15 +10,21 @@ export default class Footer extends Component {
 		super(props);
 	}
 
-	/* Renders the bottom toolbar from framework7 in order to display the footer*/
+	/* Renders the bottom toolbar from framework7 in order to display the footer and help navigation*/
 	render() {
 		const select = this.props.onSelectionChange
 		const nav = title => <Navigation active={this.props.active === title} onClick={() => select(title)} title={`#${title}`} />
 		return (
 			<div class={"toolbar toolbar-bottom " + style.footer}>
+
+
+
 				<div class="toolbar-inner">
 					{nav('view-index')}
 					{nav('view-week')}
+			
+
+
 				</div>
 			</div>
 		);

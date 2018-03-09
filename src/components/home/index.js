@@ -51,7 +51,7 @@ export default class Home extends Component {
   		);
 	}
 
-	/* Parse response from API, setting states which will be necessary to build Home components */
+	/* Parse the JSON files which aided the home page data tiles */
 	parseResponse = (parsed_json) => {
 		console.log('Home: Weather API call sucessful');
 		this.setState({

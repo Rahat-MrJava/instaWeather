@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import style from './style';
-import $ from 'jquery';// import jquery for API calls
+import $ from 'jquery';// import jquery for API calls for JSON
 
 export default class Tile extends Component {
 

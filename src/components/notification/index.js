@@ -5,6 +5,9 @@ import $ from 'jquery';
 export default class Notification extends Component {
 	/* Make initial call for weather data, if necessary,
 		and set initial state of app as "daytime" mode */
+
+
+
 	constructor(props){
 		super(props);
 		this.fetchWeatherData();
@@ -29,7 +32,9 @@ export default class Notification extends Component {
 		})
 	}
 
-	/* Render Notification popover and evaluate appropriate message to be displayed */
+	/* Render of the suggestion whether it is recommended to go outside or not */
+
+
 	render() {	
 		if (!this.state.fetchWeatherData) {
 			this.fetchWeatherData();

@@ -2,6 +2,17 @@ import { h, Component } from 'preact';
 import style from './style';
 import $ from 'jquery';
 
+
+
+
+
+/*FILE NOT USED ANYMORE ------------------------------*/
+
+
+
+
+
+
 export default class Event extends Component {
 	
 	constructor(props) {

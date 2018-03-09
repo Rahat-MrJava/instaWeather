@@ -1,11 +1,11 @@
 import { h, Component } from 'preact';
 import './style.css';
 import OpenWeather from '../../api/openWeather';
-import axios from 'axios';
+import axios from 'axios'; //Promise based HTTP requests. async
 
 
 export default class Weather extends Component {
-  //Initial setup
+  //Initial setup for the city requested.
   constructor(props) {
     super(props);
     this.state = {city: '', isLoading: false, locationEntered: false};
@@ -102,7 +102,7 @@ export default class Weather extends Component {
   }
 
   //Clear results for new search
-  //Source: https://codepen.io/gaearon/pen/QKzAgB?editors=0010
+ 
   resetState = () => {
     this.setState({
       locationEntered: false,
