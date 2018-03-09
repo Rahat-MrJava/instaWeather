@@ -6,7 +6,7 @@ import {geolocated} from 'react-geolocated';
 
 export class SimpleMap extends Component {
   static defaultProps = {
-    center: {lat: this.props.coords.latitude., this.props.coords.longitude},
+    center: {lat: coords.latitude, coords.longitude},
     zoom: 11
   };
 
