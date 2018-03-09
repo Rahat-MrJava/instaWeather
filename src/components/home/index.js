@@ -25,26 +25,51 @@ export default class Home extends Component {
 			error : function(req, err){ console.log('Home: Weather API call failed, error: ' + err); }
 		})
 		
-		console.log(this.props);
+		
 	}
 
 	/* Render home screen by placing Tile components in organized rows */
 	render() {
 		var dailyRating = this.getDailyRating();
-		console.log(this.props.temperature);
+		var temperature, visibility, windspeed, humidity;
+		
+		if(this.props.temperature){
+			temperature = <Tile title="Temperature" data={this.props.temperature}/>;
+		} else {
+			temperature = <Tile title="Temperature" data={this.state.temperature}/>
+		}
+		
+		if(this.props.visibility){
+			visibility = <Tile title="Average Visibility" data={this.props.visibility}/>;
+		} else {
+			visibility = <Tile title="Average Visibility" data={this.state.visibility}/>;
+		}
+		
+		if(this.props.windspeed){
+			windspeed = <Tile title="Wind Speed" data={this.props.windspeed}/>;
+		} else {
+			windspeed = <Tile title="Wind Speed" data={this.state.windspeed}/>;
+		}
+		
+		if(this.props.humidity){
+			humidity = <Tile title="Humidity" data={this.props.humidity}/>;
+		} else {
+			humidity = <Tile title="Humidity" data={this.state.humidity}/>;
+		}
+		
 		return (
 			<div class={"allRows " + style.home}>
 				<div class={"row " + style.row}>
-					<Tile title="Temperature" data={this.props.temperature}/>
+					{temperature}
 					<Tile title="Chance Of Rain" data={this.state.chanceOfRain}/>
 				</div>
 				<div class={"row " + style.row}>
-					<Tile title="Average Visibility" data={this.props.visibility}/>
-					<Tile title="Wind Speed" data={this.props.windspeed}/>
+					{visibility}
+					{windspeed}
 				</div>
 				<div class={"row " + style.row}>
 					<Tile title="Cloud Cover" data={this.state.cloudCoverage}/>
-					<Tile title="Humidity" data={this.props.humidity}/>
+					{humidity}
 		  		</div>
 		  		<div class={"row " + style.row}>
 		  			<Tile title="Rating" data={dailyRating}/>
@@ -61,7 +86,7 @@ export default class Home extends Component {
 			chanceOfRain: parsed_json['currently']['precipProbability'], 
 			visibility: parsed_json['currently']['visibility'],
 			windspeed: parsed_json['currently']['windSpeed'],
-			tempurature: parsed_json['currently']['temperature'],
+			temperature: parsed_json['currently']['temperature'],
 			humidity: parsed_json['currently']['humidity'],
 			pressure: parsed_json['currently']['pressure'],
 			sunsetTime: parsed_json['daily']['data'][0]['sunsetTime'],
