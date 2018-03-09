@@ -40,6 +40,64 @@ export default class App extends Component {
 			}
 		})
 	}
+	
+	getInfo = data => {
+		if(data){
+			var that = this;
+			const apiKey = 'c8413dc39a56948004abf521e27ea290';
+			const units = 'metric';
+			const baseUrl = 'https://api.openweathermap.org/data/2.5/';
+			var locationUrlEncoded = encodeURIComponent(data);
+			
+			var url = `${baseUrl}weather?appid=${apiKey}&units=metric&cnt=5&q=${locationUrlEncoded}`;
+			
+			var result = '';
+			
+			$.ajax({
+				url: url,
+				dataType: "json",
+				success: function(res){
+					console.log(res);
+					if(res){
+						var activityType = 'outdoor';
+							const GM_API_KEY = 'AIzaSyAckapvwgWjPzEpPn4US7QD2-fNb8WuU0U';
+							
+							switch(res.weather[0].main){
+						    case 'Rain':
+						    case 'Thunderstorm':
+						    case 'Snow':
+						    case 'Mist':
+						      activityType = 'indoor';
+									break;
+						    default:
+								break;
+						  }
+						$.ajax({
+								url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${activityType}+activities+in+${res.name}&location=${res.coord.lat},${res.coord.lon}&radius=12000&key=${GM_API_KEY}`,
+								dataType: "json",
+								success: function(gmres) {
+									that.setState({
+										longitude: res.coord.lon,
+										latitude: res.coord.lan,
+										fetchLocationCalled: true,
+										places: gmres
+									});
+									// that.parsePlaces(gmres);
+									console.log(gmres);
+								},
+								error: function(req,err){
+									
+								}
+							});
+					}
+					
+				},
+				error: function(req, err){
+					console.log('App: Location API call failed, error: ' + err);
+				}
+			});
+		}
+	}
 
 	render() {
 		/* Initialize elements necessary to make API calls and obtain weather data */
@@ -54,7 +112,7 @@ export default class App extends Component {
 						<Notification apiKey={APIKEY} lat={LATITUDE} lon={LONGITUDE} notificationStatus={true}/>
 							<div class="views tabs">
 								<div class={`view ${this.state.active!=='view-day'?'view tab':'view-main tab active'}`} div id="view-day">
-									<Header onModeChange={mode => this.setState({...this.state, mode})} />
+									<Header getWeatherInfo={this.getInfo}onModeChange={mode => this.setState({...this.state, mode})} />
 										<div class="pages navbar-fixed toolbar-fixed">
 											<div class="page" data-page="day-forecast">
 												<TableHeader daily={true} />
@@ -64,7 +122,7 @@ export default class App extends Component {
 									<Footer active={this.state.active} onSelectionChange={active => this.setState({...this.state, active})}/>
 								</div>
 								<div class={`view ${this.state.active!=='view-index'?'view tab':'view-main tab active'}`} div id="view-index">
-									<Header onModeChange={mode => this.setState({...this.state, mode})} />
+									<Header getWeatherInfo={this.getInfo}onModeChange={mode => this.setState({...this.state, mode})} />
 										<div class="pages navbar-fixed toolbar-fixed">
 											<div class="page" data-page="index">
 												<Home apiKey={APIKEY} lat={LATITUDE} lon={LONGITUDE}/>
@@ -74,7 +132,7 @@ export default class App extends Component {
 									<Footer active={this.state.active} onSelectionChange={active => this.setState({...this.state, active})}/>
 								</div>
 								<div class={`view ${this.state.active!=='view-week'?'view tab':'view-main tab active'}`} div id="view-week">
-									<Header onModeChange={mode => this.setState({...this.state, mode})} />
+									<Header getWeatherInfo={this.getInfo}onModeChange={mode => this.setState({...this.state, mode})} />
 										<div class="pages navbar-fixed toolbar-fixed">
 											<div class="page " data-page="week-forecast">
 												<TableHeader daily={false} />
@@ -97,7 +155,7 @@ export default class App extends Component {
 							<Notification apiKey="" lat="" lon="" notificationStatus={false}/>
 							<div class="views tabs">
 								<div class={`view ${this.state.active!=='view-day'?'view tab':'view-main tab active'}`} div id="view-day">
-									<Header onModeChange={mode => this.setState({...this.state, mode})} />
+									<Header getWeatherInfo={this.getInfo}onModeChange={mode => this.setState({...this.state, mode})} />
 										<div class="pages navbar-fixed toolbar-fixed">
 											<div class="page" data-page="day-forecast">
 											</div>
@@ -105,7 +163,7 @@ export default class App extends Component {
 									<Footer active={this.state.active} onSelectionChange={active => this.setState({...this.state, active})}/>
 								</div>
 								<div class={`view ${this.state.active!=='view-index'?'view tab':'view-main tab active'}`} div id="view-index">
-									<Header onModeChange={mode => this.setState({...this.state, mode})} />
+									<Header getWeatherInfo={this.getInfo}onModeChange={mode => this.setState({...this.state, mode})} />
 										<div class="pages navbar-fixed toolbar-fixed">
 											<div class="page" data-page="index">
 												<EventHandler count="6" />
@@ -114,7 +172,7 @@ export default class App extends Component {
 									<Footer active={this.state.active} onSelectionChange={active => this.setState({...this.state, active})}/>
 								</div>
 								<div class={`view ${this.state.active!=='view-week'?'view tab':'view-main tab active'}`} div id="view-week">
-									<Header onModeChange={mode => this.setState({...this.state, mode})} />
+									<Header getWeatherInfo={this.getInfo}onModeChange={mode => this.setState({...this.state, mode})} />
 										<div class="pages navbar-fixed toolbar-fixed">
 											<div class="page " data-page="week-forecast">
 											

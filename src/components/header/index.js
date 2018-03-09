@@ -34,6 +34,18 @@ export default class Header extends Component {
 			headerForm.css('display', 'none');
 		}
 	}
+	
+	handleChange = (e) => {
+		this.setState({
+			...this.state,
+			city: e.target.value
+		})
+	}
+	
+	submitHandler = e => {
+		e.preventDefault();
+		this.props.getWeatherInfo(this.state.city);
+	}
 
 	/* Render Header component in application with appropriate icons and application name */
 	render() {
