@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import style from './style';
 import Tile from'../tile';
 import $ from 'jquery';
+import SimpleMap from './maps';
 
 export default class Home extends Component {
 
