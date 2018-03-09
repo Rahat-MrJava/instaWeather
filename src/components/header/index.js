@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import { Link } from 'preact-router';
 import style from './style';
 import Notification from '../notification';
+import $ from 'jquery';
 
 export default class Header extends Component {
 
@@ -24,6 +25,15 @@ export default class Header extends Component {
 			this.props.onModeChange('day')
 		}
 	}
+	
+	toggleSearch = () => {
+		var headerForm = $('.header-search-form');
+		if(headerForm.css('display') === 'none'){
+			headerForm.css('display', 'block');
+		} else {
+			headerForm.css('display', 'none');
+		}
+	}
 
 	/* Render Header component in application with appropriate icons and application name */
 	render() {
@@ -39,11 +49,24 @@ export default class Header extends Component {
 						</div>
 						<div class="left">InstaWeather</div>
 						<div class="right">
+							<a href="#" class="link icon-only" onClick={() => this.toggleSearch()}>
+								<i class={`material-icons ${style.icon}`}>search</i>
+							</a> 
+						</div>
+						<div class="right">
 							<a href="#" class="link icon-only" onClick={() => this.changeMode()}>
 								<i class={`material-icons ${style.icon}`}>brightness_4</i>
 							</a> 
 						</div>
 					</div>
+					
+					<div class="header-search-form" style="display: none">
+						<form onSubmit={this.submitHandler}>
+							<input type="text" name="city" placeholder="Enter City..." onChange={this.handleChange}/>
+							<button type="submit" style="display: none;"></button>
+						</form>
+					</div>
+					
 				</div>
 		);
 
